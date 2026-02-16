@@ -1,5 +1,7 @@
 # Checkout Payment API Automation
 
+[![Robot Tests](https://github.com/SogandSh/Checkout_Payment_API_Automation/actions/workflows/robot-tests.yml/badge.svg)](https://github.com/SogandSh/Checkout_Payment_API_Automation/actions)
+
 ## Overview
 
 This project contains an automated API validation suite for the Checkout Payment endpoint of an e-commerce marketplace.
