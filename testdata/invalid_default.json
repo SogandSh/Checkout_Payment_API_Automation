@@ -6,23 +6,10 @@
       "type": "bnpl",
       "title": "BNPL",
       "is_clickable": true,
+      "source_id": 367,
       "options": [
-        {
-          "source_id": 1,
-          "title": "Plan 1",
-          "credit": 1000,
-          "is_active": true,
-          "is_default": true,
-          "price_type": "CASH_PRICE"
-        },
-        {
-          "source_id": 2,
-          "title": "Plan 2",
-          "credit": 2000,
-          "is_active": true,
-          "is_default": true,
-          "price_type": "CREDIT_PRICE"
-        }
+        { "source_id": 386, "title": "Plan A", "credit": 1000, "is_active": true, "is_default": true, "price_type": "CASH_PRICE" },
+        { "source_id": 387, "title": "Plan B", "credit": 2000, "is_active": true, "is_default": true, "price_type": "CREDIT_PRICE" }
       ]
     }
   ]

@@ -1,4 +1,18 @@
 {
   "status": 200,
-  "payment_methods": []
+  "payment_methods": [
+    { "id": 1, "type": "online", "title": "Online Payment", "is_clickable": true },
+    { "id": 11, "type": "wallet", "title": "Digital Wallet", "is_clickable": true, "source_id": 316 },
+    {
+      "id": 8,
+      "type": "bnpl",
+      "title": "پرداخت اعتباری",
+      "is_clickable": true,
+      "source_id": 367,
+      "options": [
+        { "source_id": 386, "title": "1 قسطه", "credit": 50000000, "is_active": true, "is_default": true, "price_type": "CASH_PRICE" },
+        { "source_id": 387, "title": "3 قسطه", "credit": 409361033, "is_active": true, "is_default": false, "price_type": "CREDIT_PRICE" }
+      ]
+    }
+  ]
 }
