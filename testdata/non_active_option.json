@@ -8,8 +8,22 @@
       "is_clickable": true,
       "source_id": 367,
       "options": [
-        { "source_id": 386, "title": "Plan A", "credit": 1000, "is_active": false, "is_default": false, "price_type": "CASH_PRICE" },
-        { "source_id": 387, "title": "Plan B", "credit": 2000, "is_active": true, "is_default": true, "price_type": "CREDIT_PRICE" }
+        {
+          "source_id": 386,
+          "title": "Plan A",
+          "credit": 1000,
+          "is_active": false,
+          "is_default": false,
+          "price_type": "CASH_PRICE"
+        },
+        {
+          "source_id": 387,
+          "title": "Plan B",
+          "credit": 2000,
+          "is_active": true,
+          "is_default": true,
+          "price_type": "CREDIT_PRICE"
+        }
       ]
     }
   ]

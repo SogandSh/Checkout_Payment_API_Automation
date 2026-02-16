@@ -1,7 +1,5 @@
 *** Settings ***
-Documentation    Checkout Payment API: schema, business rules (R1–R7), and negative/edge cases.
-...              All JSON parsing and assertions are in steps/ and apis/.
-Resource         ../steps/payment_steps.robot
+Resource    ../steps/payment_steps.robot
 
 *** Test Cases ***
 S1 Happy path
@@ -44,7 +42,48 @@ S7 Wrong type
     When I validate schema
     Then validation should fail
 
-S8 S8 Non-success body status (status != 200)
+S8 Non-success body status
     Given payment response file "http_500.json"
     When I validate transport status
     Then validation should fail
+
+S9 BNPL clickable but options empty
+    Given payment response file "bnpl_clickable_empty_options.json"
+    When I validate schema
+    And I validate business rules
+    Then validation should fail
+
+S10 BNPL eligible options but no default
+    Given payment response file "bnpl_no_default.json"
+    When I validate schema
+    And I validate business rules
+    Then validation should fail
+
+S11 Duplicate payment method id
+    Given payment response file "duplicate_id.json"
+    When I validate schema
+    Then validation should fail
+
+S12 Invalid price_type
+    Given payment response file "invalid_price_type.json"
+    When I validate schema
+    And I validate business rules
+    Then validation should fail
+
+S13 Negative credit
+    Given payment response file "negative_credit.json"
+    When I validate schema
+    And I validate business rules
+    Then validation should fail
+
+S14 BNPL option missing required field
+    Given payment response file "option_missing_field.json"
+    When I validate schema
+    And I validate business rules
+    Then validation should fail
+
+S15 Empty payment_methods
+    Given payment response file "empty_payment_methods.json"
+    When I validate schema
+    And I validate business rules
+    Then validation should pass

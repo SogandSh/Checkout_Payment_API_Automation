@@ -12,7 +12,6 @@ When I validate schema
     Validate Schema
 
 And I validate business rules
-    Log    >>> STEP: calling Validate Business Rules
     Validate Business Rules
 
 Then validation should pass

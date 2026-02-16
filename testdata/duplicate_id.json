@@ -1,0 +1,17 @@
+{
+  "status": 200,
+  "payment_methods": [
+    {
+      "id": 1,
+      "type": "online",
+      "title": "Online",
+      "is_clickable": true
+    },
+    {
+      "id": 1,
+      "type": "wallet",
+      "title": "Wallet",
+      "is_clickable": true
+    }
+  ]
+}

@@ -10,18 +10,18 @@
       "options": [
         {
           "source_id": 386,
-          "title": "Plan A",
-          "credit": 0,
+          "title": "1 قسطه",
+          "credit": 5000000,
           "is_active": true,
           "is_default": false,
           "price_type": "CASH_PRICE"
         },
         {
           "source_id": 387,
-          "title": "Plan B",
-          "credit": 1000,
+          "title": "3 قسطه",
+          "credit": 5000000,
           "is_active": true,
-          "is_default": true,
+          "is_default": false,
           "price_type": "CREDIT_PRICE"
         }
       ]

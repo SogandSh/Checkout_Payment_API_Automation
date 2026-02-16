@@ -5,7 +5,7 @@
       "id": 8,
       "type": "bnpl",
       "title": "BNPL",
-      "is_clickable": false,
+      "is_clickable": true,
       "source_id": 367,
       "options": []
     }
