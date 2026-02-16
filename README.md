@@ -15,7 +15,7 @@ The purpose of this automation suite is to validate:
 
 The solution is implemented using **Robot Framework** with a clean layered BDD architecture.
 
-As permitted by the task requirements, a JSON-based simulation approach is used instead of a real HTTP server.
+As permitted by the task requirements, a JSON-based simulation approach (option B) is used instead of a real HTTP server. No HTTP calls are made, so **RequestsLibrary** is not used; **JSONLibrary** and **Collections** are used for loading and validating the sample response files.
 
 ---
 
@@ -112,6 +112,13 @@ Case-sensitive validation is enforced.
 | S6 | Missing required field | Schema validation fails |
 | S7 | Wrong field type | Type validation fails |
 | S8 | Non-success status | Fail-fast when status != 200 |
+| S9 | BNPL clickable but options empty | Validation fails (R4 violation) |
+| S10 | BNPL eligible options but no default | Validation fails (R6 violation) |
+| S11 | Duplicate payment method id | Validation fails (critical for routing) |
+| S12 | Invalid price_type (not CASH_PRICE/CREDIT_PRICE) | Validation fails (R7) |
+| S13 | Option with negative credit | Validation fails (critical for payment) |
+| S14 | BNPL option missing required field (e.g. is_active) | Validation fails |
+| S15 | Empty payment_methods | Pass (edge: no methods to validate) |
 
 ---
 
