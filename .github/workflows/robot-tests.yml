@@ -22,9 +22,84 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Robot tests
+      - name: Run Robot tests (generate JUnit)
         run: |
-          robot -d reports features/
+          mkdir -p reports
+          robot --outputdir reports --xunit junit.xml features/
+
+      - name: Publish JUnit summary (pretty)
+        if: always()
+        run: |
+          python - <<'PY'
+          import os
+          import xml.etree.ElementTree as ET
+
+          summary_path = os.environ["GITHUB_STEP_SUMMARY"]
+          junit_path = "reports/junit.xml"
+
+          with open(summary_path, "a", encoding="utf-8") as f:
+              f.write("## Robot Test Summary (JUnit)\n\n")
+
+          if not os.path.exists(junit_path):
+              with open(summary_path, "a", encoding="utf-8") as f:
+                  f.write(f"- JUnit report not found at `{junit_path}`. Check Robot run step output.\n")
+              raise SystemExit(0)
+
+          tree = ET.parse(junit_path)
+          root = tree.getroot()
+
+          # JUnit can be <testsuite> or <testsuites>
+          if root.tag == "testsuite":
+              suites = [root]
+          else:
+              suites = root.findall("testsuite")
+
+          def to_int(x):
+              try:
+                  return int(float(x))
+              except Exception:
+                  return 0
+
+          total_tests = sum(to_int(s.attrib.get("tests", 0)) for s in suites)
+          total_failures = sum(to_int(s.attrib.get("failures", 0)) for s in suites)
+          total_errors = sum(to_int(s.attrib.get("errors", 0)) for s in suites)
+          total_skipped = sum(to_int(s.attrib.get("skipped", 0)) for s in suites)
+          total_passed = total_tests - total_failures - total_errors - total_skipped
+
+          failed_cases = []
+          for s in suites:
+              for tc in s.findall("testcase"):
+                  name = tc.attrib.get("name", "unknown")
+                  classname = tc.attrib.get("classname", "")
+                  failure = tc.find("failure")
+                  error = tc.find("error")
+                  if failure is not None:
+                      msg = (failure.attrib.get("message") or "").strip()
+                      failed_cases.append((classname, name, msg))
+                  elif error is not None:
+                      msg = (error.attrib.get("message") or "").strip()
+                      failed_cases.append((classname, name, msg))
+
+          with open(summary_path, "a", encoding="utf-8") as f:
+              f.write("| Metric | Count |\n")
+              f.write("|---|---:|\n")
+              f.write(f"| Total | {total_tests} |\n")
+              f.write(f"| Passed | {total_passed} |\n")
+              f.write(f"| Failed | {total_failures} |\n")
+              f.write(f"| Errors | {total_errors} |\n")
+              f.write(f"| Skipped | {total_skipped} |\n")
+
+              if failed_cases:
+                  f.write("\n### Failed Tests\n")
+                  for classname, name, msg in failed_cases[:20]:
+                      title = f"{classname} :: {name}" if classname else name
+                      if msg:
+                          f.write(f"- **{title}** — {msg}\n")
+                      else:
+                          f.write(f"- **{title}**\n")
+                  if len(failed_cases) > 20:
+                      f.write(f"- ... and {len(failed_cases) - 20} more\n")
+          PY
 
       - name: Upload Robot reports
         if: always()
