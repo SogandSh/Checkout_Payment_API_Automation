@@ -1,1 +1,3 @@
-# Checkout_Payment_API_Automation
+# Checkout Payment API Automation
+
+Robot Framework–based API automation for checkout payment flows.
