@@ -1,0 +1,9 @@
+{
+  "status": 200,
+  "payment_methods": [
+    {
+      "id": 1,
+      "is_clickable": true
+    }
+  ]
+}

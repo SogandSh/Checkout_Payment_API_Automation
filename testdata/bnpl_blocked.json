@@ -1,0 +1,12 @@
+{
+  "status": 200,
+  "payment_methods": [
+    {
+      "id": 8,
+      "type": "bnpl",
+      "title": "BNPL",
+      "is_clickable": false,
+      "options": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "status": 200,
+  "payment_methods": [
+    {
+      "id": 8,
+      "type": "bnpl",
+      "title": "BNPL",
+      "is_clickable": true,
+      "options": [
+        {
+          "source_id": 1,
+          "title": "Plan 1",
+          "credit": 1000,
+          "is_active": true,
+          "is_default": true,
+          "price_type": "CASH_PRICE"
+        },
+        {
+          "source_id": 2,
+          "title": "Plan 2",
+          "credit": 2000,
+          "is_active": true,
+          "is_default": true,
+          "price_type": "CREDIT_PRICE"
+        }
+      ]
+    }
+  ]
+}
